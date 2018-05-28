@@ -6,13 +6,17 @@
 // Load the Visualization API and the piechart package.
 google.charts.load('current', {'packages': ['corechart']});
 
+console.log("Loaded API");
+
 // Set a callback to run when the Google Visualization API is loaded.
 google.charts.setOnLoadCallback(trendingTopicsChart);
 google.charts.setOnLoadCallback(messagesPerDayChart);
 google.charts.setOnLoadCallback(repliesPerDayChart);
-google.charts.setOnLoadCallback(usersPerDay);
-google.charts.setOnLoadCallback(likesPerDay);
-google.charts.setOnLoadCallback(dislikesPerDay);
+google.charts.setOnLoadCallback(usersPerDayChart);
+google.charts.setOnLoadCallback(likesPerDayChart);
+google.charts.setOnLoadCallback(dislikesPerDayChart);
+
+console.log("Loaded functions");
 
 
 function reformatData(jsonData){
@@ -93,7 +97,6 @@ function messagesPerDayChart(){
     var chart = new google.visualization.BarChart(document.getElementById('messages_per_day'));
     chart.draw(data, options);
 }
-
 
 function repliesPerDayChart() {
     var jsonData = $.ajax({
