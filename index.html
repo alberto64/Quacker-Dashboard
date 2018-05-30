@@ -1,39 +1,13 @@
 <html>
   <head>
-      <meta charset="utf-8"/>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-      <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="appjs/dashboard.js"></script>
   </head>
 
   <body>
     <!--Div that will hold the pie chart-->
-    <table>
-        <tr>
-            <td>
-                <div id="trending_topics"></div>
-            </td>
-            <td>
-                <div id="messages_per_day"></div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="replies_per_day"></div>
-            </td>
-            <td>
-                <div id="users_per_day"></div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="likes_per_day"></div>
-            </td>
-            <td>
-                <div id="dislikes_per_day"></div>
-            </td>
-        </tr>
-    </table>
+    <div id="chart_div"></div>
   </body>
 </html>
