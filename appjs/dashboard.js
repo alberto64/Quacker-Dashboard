@@ -68,26 +68,16 @@ function reformatMessageData(jsonData){
     var row;
     var keys = Object.keys(temp);
     console.log(keys);
+
     for(i=0; i < keys.length; ++i) {
         console.log();
         console.log();
-
+        dataElement = [];
         dataElement.push(keys[i]);
         dataElement.push(temp[keys[i]][0]);
+        result.push(dataElement);
     }
 
-     for (i=0; i < temp.length; ++i){
-
-        //console.log("Checking the values of each key")
-        //console.log(key);
-       // console.log(temp[key]);
-        row= temp[i]
-        dataElement = [];
-
-        result.push(dataElement);
-
-  }
-//  console.log("Data: " + JSON.stringify(result));
     return result;
 }
 function drawMessageChart() {
