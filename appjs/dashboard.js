@@ -187,7 +187,7 @@ function drawDisLikesChart() {
 
 //Draw chart for replies per day
 function reformatRepliesData(jsonData){
-    var temp= jsonData.MessagesReplies;
+    var temp= jsonData.Messages;
     console.log("temp: " + JSON.stringify(temp));
 
     var result = [];
