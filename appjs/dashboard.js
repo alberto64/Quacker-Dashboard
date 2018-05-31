@@ -6,7 +6,7 @@
 google.charts.load('current', {'packages': ['corechart']});
 
 // Set a callback to run when the Google Visualization API is loaded.
-//google.charts.setOnLoadCallback(drawChart);
+
 google.charts.setOnLoadCallback(drawMessageChart);
 google.charts.setOnLoadCallback(drawLikesChart);
 google.charts.setOnLoadCallback(drawDisLikesChart);
@@ -15,33 +15,44 @@ google.charts.setOnLoadCallback(drawRepliesChart);
 
 function reformatMessageData(jsonData){
     var temp= jsonData.Messages;
-    console.log("temp: " + JSON.stringify(temp));
+  console.log("temp: " + JSON.stringify(temp));
+
+  JSON.stringify(temp);
 
     var result = [];
     var i;
     var row;
     var keys = Object.keys(temp);
-    console.log(keys);
+    console.log(keys.length);
+    var nextDay;
+    var nextCount;
 
     for(i=0; i < keys.length; ++i) {
-        console.log();
-        console.log();
+        row = keys[i];
+        nextDay = row;
+        nextCount = temp[keys[i]][0];
+        console.log(nextDay);
+        console.log(nextCount);
+
         dataElement = [];
-        dataElement.push(keys[i]);
-        dataElement.push(temp[keys[i]][0]);
+
+        dataElement.push("d-"+row);
+        dataElement.push(parseInt(temp[keys[i]][0]));
+
         result.push(dataElement);
     }
-
+    console.log("result: " + JSON.stringify(result));
     return result;
 }
 function drawMessageChart() {
     var jsonData = $.ajax({
-        url: "http://quacker-pr.herokuapp.com/dashboard/messages",
+        url: "https://quacker-pr.herokuapp.com/dashboard/messages",
         dataType: "json",
         async: false
     }).responseText;
-   // console.log(jsonData);
-    console.log("jsonData: " + JSON.parse(jsonData));
+
+
+       console.log("jsonData: " + JSON.parse(jsonData));
 
     // Create our data table out of JSON data loaded from server.
     var data = new google.visualization.DataTable();
@@ -49,7 +60,6 @@ function drawMessageChart() {
     data.addColumn('number', 'messagesPerDay');
 
     data.addRows(reformatMessageData(JSON.parse(jsonData)));
-
     var options = {
         title: 'Messages per day',
         chartArea: {width: '50%'},
@@ -77,14 +87,19 @@ function reformatLikesData(jsonData){
     var i;
     var row;
     var keys = Object.keys(temp);
-    console.log(keys);
 
     for(i=0; i < keys.length; ++i) {
-        console.log();
-        console.log();
+    row = keys[i];
+        nextDay = row;
+        nextCount = temp[keys[i]][0];
+        console.log(nextDay);
+        console.log(nextCount);
+
         dataElement = [];
-        dataElement.push(keys[i]);
-        dataElement.push(temp[keys[i]][0]);
+
+        dataElement.push("d-"+row);
+        dataElement.push(parseInt(temp[keys[i]][0]));
+
         result.push(dataElement);
     }
 
@@ -123,9 +138,11 @@ function drawLikesChart() {
     chart.draw(data, options);
 
 }
+//
+////-----------------------------------------------------------------------------------------------------------
+////Draw chart for dislikes per day
 
-//-----------------------------------------------------------------------------------------------------------
-//Draw chart for dislikes per day
+
 function reformatDisLikesData(jsonData){
     var temp= jsonData.Dislikes;
     console.log("temp: " + JSON.stringify(temp));
@@ -134,14 +151,18 @@ function reformatDisLikesData(jsonData){
     var i;
     var row;
     var keys = Object.keys(temp);
-    console.log(keys);
-
     for(i=0; i < keys.length; ++i) {
-        console.log();
-        console.log();
+    row = keys[i];
+        nextDay = row;
+        nextCount = temp[keys[i]][0];
+        console.log(nextDay);
+        console.log(nextCount);
+
         dataElement = [];
-        dataElement.push(keys[i]);
-        dataElement.push(temp[keys[i]][0]);
+
+        dataElement.push("d-"+row);
+        dataElement.push(parseInt(temp[keys[i]][0]));
+
         result.push(dataElement);
     }
 
@@ -153,7 +174,7 @@ function drawDisLikesChart() {
         dataType: "json",
         async: false
     }).responseText;
-   // console.log(jsonData);
+
     console.log("jsonData: " + JSON.parse(jsonData));
 
     // Create our data table out of JSON data loaded from server.
@@ -181,27 +202,31 @@ function drawDisLikesChart() {
 
 }
 
-
-
 //------------------------------------------------------------------------------------------------------------
 
-//Draw chart for replies per day
+////Draw chart for replies per day
 function reformatRepliesData(jsonData){
-    var temp= jsonData.Messages;
+    var temp= jsonData.ReplyMessages;
+
     console.log("temp: " + JSON.stringify(temp));
 
     var result = [];
     var i;
     var row;
     var keys = Object.keys(temp);
-    console.log(keys);
 
     for(i=0; i < keys.length; ++i) {
-        console.log();
-        console.log();
+        row = keys[i];
+
+        nextDay = row;
+        nextCount = temp[keys[i]][0];
+        console.log(nextDay);
+        console.log(nextCount);
+
         dataElement = [];
-        dataElement.push(keys[i]);
-        dataElement.push(temp[keys[i]][0]);
+        dataElement.push("d-"+row);
+        dataElement.push(parseInt(temp[keys[i]][0]));
+
         result.push(dataElement);
     }
 
@@ -221,7 +246,7 @@ function drawRepliesChart() {
     data.addColumn('string', 'Days');
     data.addColumn('number', 'Replies');
 
-    data.addRows(reformatDisLikesData(JSON.parse(jsonData)));
+    data.addRows(reformatRepliesData(JSON.parse(jsonData)));
 
     var options = {
         title: 'Replies per day',
@@ -241,13 +266,11 @@ function drawRepliesChart() {
 
 }
 
-
-
-
 //-----------------------------------------------------------------------------------
+
 google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawRepliesChart);
 google.charts.setOnLoadCallback(drawMessageChart);
 google.charts.setOnLoadCallback(drawLikesChart);
 google.charts.setOnLoadCallback(drawDisLikesChart);
-google.charts.setOnLoadCallback(drawRepliesChart);
 
