@@ -305,7 +305,7 @@ function reformatUsersData(jsonData){
     var keys = Object.keys(temp);
     console.log(keys);
 
-    for(i=0; i < keys.length; i++) {
+    for(i=keys.length-1; i > 0; i--) {
         for(var j=0; j < temp[keys[i]].length && j<10; j++) {
             dataElement = [];
             dataElement.push(keys[i]);
